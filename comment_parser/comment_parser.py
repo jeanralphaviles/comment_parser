@@ -14,12 +14,14 @@ import sys
 import magic
 
 from comment_parser.parsers import common as common
+from comment_parser.parsers import shell_parser
 from comment_parser.parsers import c_parser
 
 MIME_MAP = {
-    'text/x-c': c_parser,           # C
-    'text/x-c++': c_parser,         # C++
-    'text/x-java-source': c_parser  # Java
+    'text/x-c': c_parser,               # C
+    'text/x-c++': c_parser,             # C++
+    'text/x-java-source': c_parser,     # Java
+    'text/x-shellscript': shell_parser  # Unix shell
 }
 
 

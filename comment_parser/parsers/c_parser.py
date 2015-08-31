@@ -16,7 +16,7 @@ def extract_comments(filename):
 
     Comments are represented with the Comment class found in the common module.
     C family comments come in two forms, single and multi-line comments.
-        - Single line comments begin with '//' and continue to the end of line.
+        - Single-line comments begin with '//' and continue to the end of line.
         - Multi-line comments begin with '/*' and end with '*/' and can span
             multiple lines of code. If a multi-line comment does not terminate
             before EOF is reached, then an exception is raised.

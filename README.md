@@ -71,6 +71,7 @@ class Comment(object):
 1. C
 2. C++
 3. Java
-4. More to come!
+4. Shell scripts (Bash, sh, etc.)
+5. More to come!
 
 *Check comment_parser.py for corresponding MIME types.*
