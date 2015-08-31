@@ -9,7 +9,7 @@ setup(
     version='1.0',
     description='Parse comments from various source files.',
     classifiers=[
-      'Development Status :: 3',
+      'Development Status :: 3 - Alpha',
       'Programming Language :: Python :: 3',
       'Topic :: Software Development :: Documentation',
       'License :: OSI Approved :: MIT License'
