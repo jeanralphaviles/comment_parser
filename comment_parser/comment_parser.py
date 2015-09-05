@@ -4,6 +4,8 @@
 Currently supported languages:
     C/C++
     Java
+    Javascript
+    Bash/Sh
 
 Dependencies:
     python-magic: pip install python-magic
@@ -16,11 +18,13 @@ import magic
 from comment_parser.parsers import common as common
 from comment_parser.parsers import shell_parser
 from comment_parser.parsers import c_parser
+from comment_parser.parsers import js_parser
 
 MIME_MAP = {
     'text/x-c': c_parser,               # C
     'text/x-c++': c_parser,             # C++
     'text/x-java-source': c_parser,     # Java
+    'text/x-javascript': js_parser,     # Javascript
     'text/x-shellscript': shell_parser  # Unix shell
 }
 

@@ -46,7 +46,7 @@ class Comment(object):
         Returns:
             Int
         """
-        return self.line_number
+        return self._line_number
 
     def is_multiline(self):
         """Returns whether this comment was a multiline comment.
