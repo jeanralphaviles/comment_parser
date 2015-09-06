@@ -70,9 +70,10 @@ class Comment(object):
 ---
 1. C
 2. C++
-3. Java
-4. Javascript
-5. Shell scripts (Bash, sh, etc.)
-6. More to come!
+3. Go
+4. Java
+5. Javascript
+6. Shell scripts (Bash, sh, etc.)
+7. More to come!
 
 *Check comment_parser.py for corresponding MIME types.*
