@@ -39,17 +39,17 @@ def extract_comments(filename):
         pattern = r"""
             (?P<literal> (\"([^\"\n])*\")+) |
             (?P<single> //(?P<single_content>.*)?$) |
-            (?P<multi> /\*(?P<multi_content>.*)?\*/) |
+            (?P<multi> /\*(?P<multi_content>(.|\n)*)?\*/) |
             (?P<error> /\*(.*)?)
         """
 
-        compiled = re.compile(pattern, re.VERBOSE | re.MULTILINE | re.DOTALL)
+        compiled = re.compile(pattern, re.VERBOSE | re.MULTILINE)
 
         with open(filename, 'r') as source_file:
             content = source_file.read()
 
         lines_indexes = []
-        for match in re.finditer(r"$", content):
+        for match in re.finditer(r"$", content, re.M):
             lines_indexes.append(match.start())
 
         comments = []

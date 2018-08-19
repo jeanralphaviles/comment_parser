@@ -17,6 +17,12 @@ class CParserTest(unittest.TestCase):
         mock_open.return_value = mock_file
         return c_parser.extract_comments('filename')
 
+    def testSimpleMain(self):
+        text = "// this is a comment\nint main() {\nreturn 0;\n}\n"
+        comments = self.ExtractComments(text)
+        expected = [common.Comment(text[2:20], 1, multiline=False)]
+        self.assertEqual(comments, expected)
+
     def testSingleLineComment(self):
         text = '// single line comment'
         comments = self.ExtractComments(text)
