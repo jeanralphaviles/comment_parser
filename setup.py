@@ -6,7 +6,7 @@ def readme():
 
 setup(
     name='comment_parser',
-    version='1.0.4',
+    version='1.0.5',
     description='Parse comments from various source files.',
     classifiers=[
       'Development Status :: 5 - Production/Stable',
@@ -18,6 +18,8 @@ setup(
     author='Jean-Ralph Aviles',
     author_email='jeanralph.aviles+pypi@gmail.com',
     license='MIT',
+    long_description=readme(),
+    long_description_content_type='text/markdown',
     packages=['comment_parser', 'comment_parser.parsers'],
     install_requires=['python-magic>=0.4'],
     test_suite='nose.collector',
