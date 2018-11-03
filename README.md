@@ -1,5 +1,10 @@
 # Comment Parser
 
+[![PyPI status](https://img.shields.io/pypi/status/comment_parser.svg)](https://pypi.python.org/pypi/comment_parser/)
+[![PyPI version shields.io](https://img.shields.io/pypi/v/comment_parser.svg)](https://pypi.python.org/pypi/comment_parser/)
+[![PyPI license](https://img.shields.io/pypi/l/comment_parser.svg)](https://pypi.python.org/pypi/comment_parser/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/comment_parser.svg)](https://pypi.python.org/pypi/comment_parser/)
+
 Python module used to extract comments from source code files of various types.
 
 ## Installation
