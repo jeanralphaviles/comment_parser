@@ -63,7 +63,9 @@ def extract_comments(filename, mime=None):
         UnsupportedError: If filename is of an unsupported MIME type.
     """
     if not mime:
-        mime = magic.from_file(filename, mime=True).decode('utf-8')
+        mime = magic.from_file(filename, mime=True)
+        if type(mime) == bytes:
+            mime = mime.decode('utf-8')
     if mime not in MIME_MAP:
         raise UnsupportedError(
             'Unsupported MIME type %s for file %s' % (mime, filename))
