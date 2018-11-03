@@ -90,12 +90,15 @@ python3 setup.py test
 
 ## Supported Programming Languages
 
-1. C
-2. C++
-3. Go
-4. Java
-5. Javascript
-6. Shell scripts (Bash, sh, etc.)
-7. More to come!
+| Language    | Mime String         |
+|------------ |-------------------- |
+| C           | text/x-c            |
+| C++         | text/x-c++          |
+| Go          | text/x-go           |
+| Java        | text/x-java-source  |
+| Javascript  | text/x-javascript   |
+| Shell       | text/x-shellscript  |
+
+And more to come!
 
 *Check comment_parser.py for corresponding MIME types.*
