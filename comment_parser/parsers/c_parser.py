@@ -10,7 +10,6 @@ Works with:
 
 from comment_parser.parsers import common as common
 
-
 def extract_comments(filename):
     """Extracts a list of comments from the given C family source file.
 
@@ -34,81 +33,44 @@ def extract_comments(filename):
             comment.
     """
     try:
+        import re
+        from bisect import bisect_left
+
+        pattern = r"""
+            (?P<literal> (\"([^\"\n])*\")+) |
+            (?P<single> //(?P<single_content>.*)?$) |
+            (?P<multi> /\*(?P<multi_content>(.|\n)*)?\*/) |
+            (?P<error> /\*(.*)?)
+        """
+
+        compiled = re.compile(pattern, re.VERBOSE | re.MULTILINE)
+
         with open(filename, 'r') as source_file:
-            state = 0
-            current_comment = ''
-            comments = []
-            line_counter = 1
-            comment_start = 1
-            while True:
-                char = source_file.read(1)
-                if not char:
-                    if state is 3 or state is 4:
-                        raise common.UnterminatedCommentError()
-                    if state is 2:
-                        # Was in single line comment. Create comment.
-                        comment = common.Comment(current_comment, line_counter)
-                        comments.append(comment)
-                    return comments
-                if state is 0:
-                    # Waiting for comment start character or beginning of
-                    # string.
-                    if char == '/':
-                        state = 1
-                    elif char == '"':
-                        state = 5
-                elif state is 1:
-                    # Found comment start character, classify next character and
-                    # determine if single or multiline comment.
-                    if char == '/':
-                        state = 2
-                    elif char == '*':
-                        comment_start = line_counter
-                        state = 3
-                    else:
-                        state = 0
-                elif state is 2:
-                    # In single line comment, read characters until EOL.
-                    if char == '\n':
-                        comment = common.Comment(current_comment, line_counter)
-                        comments.append(comment)
-                        current_comment = ''
-                        state = 0
-                    else:
-                        current_comment += char
-                elif state is 3:
-                    # In multi-line comment, add characters until '*'
-                    # encountered.
-                    if char == '*':
-                        state = 4
-                    else:
-                        current_comment += char
-                elif state is 4:
-                    # In multi-line comment with asterisk found. Determine if
-                    # comment is ending.
-                    if char == '/':
-                        comment = common.Comment(
-                            current_comment, comment_start, multiline=True)
-                        comments.append(comment)
-                        current_comment = ''
-                        state = 0
-                    else:
-                        current_comment += '*'
-                        # Care for multiple '*' in a row
-                        if char != '*':
-                            current_comment += char
-                            state = 3
-                elif state is 5:
-                    # In string literal, expect literal end or escape char.
-                    if char == '"':
-                        state = 0
-                    elif char == '\\':
-                        state = 6
-                elif state is 6:
-                    # In string literal, escaping current char.
-                    state = 5
-                if char == '\n':
-                    line_counter += 1
+            content = source_file.read()
+
+        lines_indexes = []
+        for match in re.finditer(r"$", content, re.M):
+            lines_indexes.append(match.start())
+
+        comments = []
+        for match in compiled.finditer(content):
+            kind = match.lastgroup
+
+            start_character = match.start()
+            line_no = bisect_left(lines_indexes, start_character)
+
+            if kind == "single":
+                comment_content = match.group("single_content")
+                comment = common.Comment(comment_content, line_no + 1)
+                comments.append(comment)
+            elif kind == "multi":
+                comment_content = match.group("multi_content")
+                comment = common.Comment(comment_content, line_no + 1, multiline=True)
+                comments.append(comment)
+            elif kind == "error":
+                raise common.UnterminatedCommentError()
+
+        return comments
     except OSError as exception:
         raise common.FileError(str(exception))
 
