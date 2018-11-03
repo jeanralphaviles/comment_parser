@@ -114,9 +114,11 @@ twine upload dist/*
 | C           | text/x-c            |
 | C++         | text/x-c++          |
 | Go          | text/x-go           |
+| HTML        | text/html           |
 | Java        | text/x-java-source  |
 | Javascript  | text/x-javascript   |
 | Shell       | text/x-shellscript  |
+| XML         | text/xml            |
 
 And more to come!
 
