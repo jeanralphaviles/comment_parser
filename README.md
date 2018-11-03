@@ -4,6 +4,10 @@ Python module used to extract comments from source code files of various types.
 
 ## Installation
 
+### Prerequisites
+
+* libmagic
+
 ### Linux/Unix
 To install run 'sudo pip3 install comment_parser'.
 
