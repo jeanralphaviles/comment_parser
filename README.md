@@ -88,6 +88,13 @@ comment_parser.extract_comments('foo.c', mime='text/x-c')
 python3 setup.py test
 ```
 
+### Deploying to PyPi
+
+```python
+python3 setup.py sdist
+twine upload dist/*
+```
+
 ## Supported Programming Languages
 
 | Language    | Mime String         |
