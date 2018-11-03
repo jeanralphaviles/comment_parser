@@ -1,22 +1,27 @@
 # Comment Parser
----
+
 Python module used to extract comments from source code files of various types.
+
 ## Installation
----
+
 ### Linux/Unix
 To install run 'sudo pip3 install comment_parser'.
+
 ### OSX and Windows
-Complete the special installation requirements for [python-magic](https://github.com/ahupp/python-magic).
+Additionally, complete the special installation requirements for
+[python-magic](https://github.com/ahupp/python-magic).
+
 ## Usage
----
+
 To use, simply run:
 
 ```python
 >>> from comment_parser import comment_parser
->>> comment_parser.extract_comments('/path/to/source_file')  # Returns a list of comment_parser.parsers.common.Comments
+>>> # Returns a list of comment_parser.parsers.common.Comments
+>>> comment_parser.extract_comments('/path/to/source_file')
 ```
-### extract_comments Signature
----
+### extract_comments signature
+
 ```python
 def extract_comments(filename, mime=None):
     """Extracts and returns the comments from the given source file.
@@ -34,7 +39,7 @@ def extract_comments(filename, mime=None):
     """
 ```
 ### Comments Interface
----
+
 ```python
 class Comment(object):
     """Represents comments found in source files."""
@@ -66,8 +71,25 @@ class Comment(object):
         pass
 ```
 
+## Development
+
+### Running locally
+
+Start python3 in the base of repository.
+
+```python
+from comment_parser import comment_parser
+comment_parser.extract_comments('foo.c', mime='text/x-c')
+```
+
+### Running tests
+
+```python
+python3 setup.py test
+```
+
 ## Supported Programming Languages
----
+
 1. C
 2. C++
 3. Go
