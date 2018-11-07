@@ -31,7 +31,7 @@ MIME_MAP = {
     'text/x-go': go_parser,             # Go
     'text/x-java-source': c_parser,     # Java
     'text/x-javascript': js_parser,     # Javascript
-    'text/x-shellscript': shell_parser  # Unix shell
+    'text/x-shellscript': shell_parser, # Unix shell
     'text/xml': html_parser,            # XML
 }
 
