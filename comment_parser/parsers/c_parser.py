@@ -39,7 +39,7 @@ def extract_comments(filename):
         pattern = r"""
             (?P<literal> (\"([^\"\n])*\")+) |
             (?P<single> //(?P<single_content>.*)?$) |
-            (?P<multi> /\*(?P<multi_content>(.|\n)*)?\*/) |
+            (?P<multi> /\*(?P<multi_content>(.|\n)*?)?\*/) |
             (?P<error> /\*(.*)?)
         """
 
