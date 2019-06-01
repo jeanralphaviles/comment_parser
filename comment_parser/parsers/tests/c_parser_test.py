@@ -56,6 +56,15 @@ class CParserTest(unittest.TestCase):
         self.assertRaises(
             common.UnterminatedCommentError, self.ExtractComments, text)
 
+    def testMultipleMultilineComments(self):
+        text = '/* abc */ /* 123 */'
+        comments = self.ExtractComments(text)
+        expected = [
+            common.Comment(' abc ', 1, multiline=True),
+            common.Comment(' 123 ', 1, multiline=True),
+        ]
+        self.assertEqual(comments, expected)
+
     @mock.patch.object(builtins, 'open')
     def testExtractCommentsFileError(self, mock_open):
         mock_open.side_effect = FileNotFoundError()
