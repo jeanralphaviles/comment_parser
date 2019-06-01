@@ -25,14 +25,15 @@ from comment_parser.parsers import js_parser
 from comment_parser.parsers import shell_parser
 
 MIME_MAP = {
-    'text/html': html_parser,           # HTML
-    'text/x-c': c_parser,               # C
-    'text/x-c++': c_parser,             # C++
-    'text/x-go': go_parser,             # Go
-    'text/x-java-source': c_parser,     # Java
-    'text/x-javascript': js_parser,     # Javascript
-    'text/x-shellscript': shell_parser, # Unix shell
-    'text/xml': html_parser,            # XML
+    'application/javascript': js_parser,  # Javascript
+    'text/html': html_parser,             # HTML
+    'text/x-c': c_parser,                 # C
+    'text/x-c++': c_parser,               # C++
+    'text/x-go': go_parser,               # Go
+    'text/x-java-source': c_parser,       # Java
+    'text/x-javascript': js_parser,       # Javascript
+    'text/x-shellscript': shell_parser,   # Unix shell
+    'text/xml': html_parser,              # XML
 }
 
 
