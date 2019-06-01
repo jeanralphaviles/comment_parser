@@ -112,7 +112,7 @@ twine upload dist/*
 | Language    | Mime String              |
 |------------ |------------------------- |
 | C           | text/x-c                 |
-| C++         | text/x-c++               |
+| C++/C#      | text/x-c++               |
 | Go          | text/x-go                |
 | HTML        | text/html                |
 | Java        | text/x-java-source       |

@@ -28,7 +28,7 @@ MIME_MAP = {
     'application/javascript': js_parser,  # Javascript
     'text/html': html_parser,             # HTML
     'text/x-c': c_parser,                 # C
-    'text/x-c++': c_parser,               # C++
+    'text/x-c++': c_parser,               # C++/C#
     'text/x-go': go_parser,               # Go
     'text/x-java-source': c_parser,       # Java
     'text/x-javascript': js_parser,       # Javascript
