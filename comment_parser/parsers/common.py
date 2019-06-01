@@ -59,6 +59,10 @@ class Comment(object):
     def __str__(self):
         return self._text
 
+    def __repr__(self):
+        return 'Comment(%s, %d, %s)' % (
+            self._text, self._line_number, self._multiline)
+
     def __eq__(self, other):
         if isinstance(other, self.__class__):
             if self.__dict__ == other.__dict__:
