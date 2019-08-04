@@ -32,8 +32,10 @@ To use, simply run:
 >>> from comment_parser import comment_parser
 >>> # Returns a list of comment_parser.parsers.common.Comments
 >>> comment_parser.extract_comments('/path/to/source_file')
+>>> # Or
+>>> comment_parser.extract_comments_from_str('...')
 ```
-### extract_comments signature
+### extract_comments signatures
 
 ```python
 def extract_comments(filename, mime=None):
@@ -50,6 +52,24 @@ def extract_comments(filename, mime=None):
     Raises:
         UnsupportedError: If filename is of an unsupported MIME type.
     """
+    pass
+
+
+def extract_comments_from_str(code, mime=None):
+    """Extracts and returns comments from the given source string.
+
+    Args:
+        code: String containing code to extract comments from.
+        mime: Optional MIME type for code (str). Note some MIME types accepted
+            don't comply with RFC2045. If not given, an attempt to deduce the
+            MIME type will occur.
+    Returns:
+        Python list of parsers.common.Comment in the order that they appear in
+            the source code.
+    Raises:
+        UnsupportedError: If code is of an unsupported MIME type.
+    """
+    pass
 ```
 ### Comments Interface
 

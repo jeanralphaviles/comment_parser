@@ -66,18 +66,35 @@ def extract_comments(filename, mime=None):
     Raises:
         UnsupportedError: If filename is of an unsupported MIME type.
     """
+    with open(filename, 'r') as code:
+        return extract_comments_from_str(code.read(), mime)
+
+
+def extract_comments_from_str(code, mime=None):
+    """Extracts and returns comments from the given source string.
+
+    Args:
+        code: String containing code to extract comments from.
+        mime: Optional MIME type for code (str). Note some MIME types accepted
+            don't comply with RFC2045. If not given, an attempt to deduce the
+            MIME type will occur.
+    Returns:
+        Python list of parsers.common.Comment in the order that they appear in
+            the source code.
+    Raises:
+        UnsupportedError: If code is of an unsupported MIME type.
+    """
     if not mime:
-        mime = magic.from_file(filename, mime=True)
+        mime = magic.from_buffer(code, mime=True)
         if type(mime) == bytes:
             mime = mime.decode('utf-8')
     if mime not in MIME_MAP:
-        raise UnsupportedError(
-            'Unsupported MIME type %s for file %s' % (mime, filename))
+        raise UnsupportedError('Unsupported MIME type %s' % mime)
     try:
         parser = MIME_MAP[mime]
-    except common.Error as exception:
-        raise ParseError(str(exception))
-    return parser.extract_comments(filename)
+    except common.Error as e:
+        raise ParseError(str(e))
+    return parser.extract_comments(code)
 
 
 def main(argv):

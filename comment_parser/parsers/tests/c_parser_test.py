@@ -5,68 +5,53 @@ from comment_parser.parsers import common as common
 from comment_parser.parsers import c_parser as c_parser
 
 import unittest
-import builtins
-from unittest import mock
-from io import StringIO
 
 class CParserTest(unittest.TestCase):
 
-    @mock.patch.object(builtins, 'open')
-    def ExtractComments(self, text, mock_open):
-        mock_file = StringIO(text)
-        mock_open.return_value = mock_file
-        return c_parser.extract_comments('filename')
-
     def testSimpleMain(self):
-        text = "// this is a comment\nint main() {\nreturn 0;\n}\n"
-        comments = self.ExtractComments(text)
-        expected = [common.Comment(text[2:20], 1, multiline=False)]
+        code = "// this is a comment\nint main() {\nreturn 0;\n}\n"
+        comments = c_parser.extract_comments(code)
+        expected = [common.Comment(code[2:20], 1, multiline=False)]
         self.assertEqual(comments, expected)
 
     def testSingleLineComment(self):
-        text = '// single line comment'
-        comments = self.ExtractComments(text)
-        expected = [common.Comment(text[2:], 1, multiline=False)]
+        code = '// single line comment'
+        comments = c_parser.extract_comments(code)
+        expected = [common.Comment(code[2:], 1, multiline=False)]
         self.assertEqual(comments, expected)
 
     def testSingleLineCommentInStringLiteral(self):
-        text = 'char* msg = "// this is not a comment"'
-        comments = self.ExtractComments(text)
+        code = 'char* msg = "// this is not a comment"'
+        comments = c_parser.extract_comments(code)
         self.assertEqual(comments, [])
 
     def testMultiLineComment(self):
-        text = '/* multiline\ncomment */'
-        comments = self.ExtractComments(text)
-        expected = [common.Comment(text[2:-2], 1, multiline=True)]
+        code = '/* multiline\ncomment */'
+        comments = c_parser.extract_comments(code)
+        expected = [common.Comment(code[2:-2], 1, multiline=True)]
         self.assertEqual(comments, expected)
 
     def testMultiLineCommentWithStars(self):
-        text = "/***************/"
-        comments = self.ExtractComments(text)
-        expected = [common.Comment(text[2:-2], 1, multiline=True)]
+        code = "/***************/"
+        comments = c_parser.extract_comments(code)
+        expected = [common.Comment(code[2:-2], 1, multiline=True)]
         self.assertEqual(comments, expected)
 
     def testMultiLineCommentInStringLiteral(self):
-        text = 'char* msg = "/* This is not a\\nmultiline comment */"'
-        comments = self.ExtractComments(text)
+        code = 'char* msg = "/* This is not a\\nmultiline comment */"'
+        comments = c_parser.extract_comments(code)
         self.assertEqual(comments, [])
 
     def testMultiLineCommentUnterminated(self):
-        text = 'int a = 1; /* Unterminated\\n comment'
+        code = 'int a = 1; /* Unterminated\\n comment'
         self.assertRaises(
-            common.UnterminatedCommentError, self.ExtractComments, text)
+            common.UnterminatedCommentError, c_parser.extract_comments, code)
 
     def testMultipleMultilineComments(self):
-        text = '/* abc */ /* 123 */'
-        comments = self.ExtractComments(text)
+        code = '/* abc */ /* 123 */'
+        comments = c_parser.extract_comments(code)
         expected = [
             common.Comment(' abc ', 1, multiline=True),
             common.Comment(' 123 ', 1, multiline=True),
         ]
         self.assertEqual(comments, expected)
-
-    @mock.patch.object(builtins, 'open')
-    def testExtractCommentsFileError(self, mock_open):
-        mock_open.side_effect = FileNotFoundError()
-        self.assertRaises(common.FileError, c_parser.extract_comments, '')
-
