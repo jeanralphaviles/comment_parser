@@ -117,13 +117,19 @@ comment_parser.extract_comments('foo.c', mime='text/x-c')
 
 ### Running tests
 
-```python
+```shell
 python3 setup.py test
+```
+
+### Running pylint
+
+```shell
+pylint comment_parser
 ```
 
 ### Deploying to PyPi
 
-```python
+```shell
 python3 setup.py sdist
 twine upload dist/*
 ```
