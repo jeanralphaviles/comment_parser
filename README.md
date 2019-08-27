@@ -144,6 +144,7 @@ twine upload dist/*
 | HTML        | text/html                |
 | Java        | text/x-java-source       |
 | Javascript  | application/javascript   |
+| Ruby        | text/x-ruby              |
 | Shell       | text/x-shellscript       |
 | XML         | text/xml                 |
 
