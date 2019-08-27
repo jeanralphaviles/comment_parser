@@ -127,6 +127,12 @@ python3 setup.py test
 pylint comment_parser
 ```
 
+### Running formatter
+
+```shell
+yapf -rip --style=chromium .
+```
+
 ### Deploying to PyPi
 
 ```shell

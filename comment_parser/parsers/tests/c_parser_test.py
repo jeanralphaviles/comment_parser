@@ -44,8 +44,8 @@ class CParserTest(unittest.TestCase):
 
   def testMultiLineCommentUnterminated(self):
     code = 'int a = 1; /* Unterminated\\n comment'
-    self.assertRaises(
-        common.UnterminatedCommentError, c_parser.extract_comments, code)
+    self.assertRaises(common.UnterminatedCommentError,
+                      c_parser.extract_comments, code)
 
   def testMultipleMultilineComments(self):
     code = '/* abc */ /* 123 */'

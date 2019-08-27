@@ -5,7 +5,8 @@ python:
   - '3.6'
 install:
   - python setup.py -q install
-  - pip install pylint
+  - pip install pylint yapf
 script:
   - python setup.py test
   - pylint comment_parser
+  - yapf -drp --style=chromium .

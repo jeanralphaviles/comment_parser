@@ -48,5 +48,5 @@ class JsParserTest(unittest.TestCase):
 
   def testMultiLineCommentUnterminated(self):
     code = 'a = 1 /* Unterminated\\n comment'
-    self.assertRaises(
-        common.UnterminatedCommentError, js_parser.extract_comments, code)
+    self.assertRaises(common.UnterminatedCommentError,
+                      js_parser.extract_comments, code)

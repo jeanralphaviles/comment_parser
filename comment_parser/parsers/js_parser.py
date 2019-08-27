@@ -69,8 +69,7 @@ def extract_comments(code):
       # In multi-line comment with asterisk found. Determine if
       # comment is ending.
       if char == '/':
-        comment = common.Comment(
-            current_comment, comment_start, multiline=True)
+        comment = common.Comment(current_comment, comment_start, multiline=True)
         comments.append(comment)
         current_comment = ''
         state = 0

@@ -52,8 +52,8 @@ class ShellParserTest(unittest.TestCase):
 
   def testUnterminatedComment(self):
     code = '<!--invalid'
-    self.assertRaises(
-        common.UnterminatedCommentError, html_parser.extract_comments, code)
+    self.assertRaises(common.UnterminatedCommentError,
+                      html_parser.extract_comments, code)
 
   def testLonelyTerminator(self):
     code = 'not a comment-->'

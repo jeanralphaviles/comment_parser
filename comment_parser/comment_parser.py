@@ -30,15 +30,15 @@ from comment_parser.parsers import shell_parser
 
 MIME_MAP = {
     'application/javascript': js_parser,  # Javascript
-    'text/html': html_parser,             # HTML
-    'text/x-c': c_parser,                 # C
-    'text/x-c++': c_parser,               # C++/C#
-    'text/x-go': go_parser,               # Go
-    'text/x-java-source': c_parser,       # Java
-    'text/x-javascript': js_parser,       # Javascript
-    'text/x-ruby': ruby_parser,           # Ruby
-    'text/x-shellscript': shell_parser,   # Unix shell
-    'text/xml': html_parser,              # XML
+    'text/html': html_parser,  # HTML
+    'text/x-c': c_parser,  # C
+    'text/x-c++': c_parser,  # C++/C#
+    'text/x-go': go_parser,  # Go
+    'text/x-java-source': c_parser,  # Java
+    'text/x-javascript': js_parser,  # Javascript
+    'text/x-ruby': ruby_parser,  # Ruby
+    'text/x-shellscript': shell_parser,  # Unix shell
+    'text/xml': html_parser,  # XML
 }
 
 
@@ -108,6 +108,7 @@ def main(argv):
         print(comment.text())
     except Error as exception:
       sys.stderr.write(str(exception))
+
 
 if __name__ == '__main__':
   main(sys.argv[1:])

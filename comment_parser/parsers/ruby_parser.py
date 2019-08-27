@@ -5,6 +5,7 @@ import re
 from bisect import bisect_left
 from comment_parser.parsers import common
 
+
 def extract_comments(code):
   """Extracts a list of comments from the given Ruby source code.
 

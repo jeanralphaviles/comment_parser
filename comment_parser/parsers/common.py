@@ -57,8 +57,8 @@ class Comment():
     return self._text
 
   def __repr__(self):
-    return 'Comment(%s, %d, %s)' % (
-        self._text, self._line_number, self._multiline)
+    return 'Comment(%s, %d, %s)' % (self._text, self._line_number,
+                                    self._multiline)
 
   def __eq__(self, other):
     if isinstance(other, self.__class__):

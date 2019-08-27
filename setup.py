@@ -1,8 +1,10 @@
 from setuptools import setup
 
+
 def readme():
   with open('README.md') as readme_file:
     return readme_file.read()
+
 
 setup(
     name='comment_parser',

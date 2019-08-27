@@ -10,6 +10,7 @@ import re
 from bisect import bisect_left
 from comment_parser.parsers import common
 
+
 def extract_comments(code):
   """Extracts a list of comments from the given HTML family source code.
 
@@ -50,8 +51,7 @@ def extract_comments(code):
       comments.append(comment)
     elif kind == "multi":
       comment_content = match.group("multi_content")
-      comment = common.Comment(
-          comment_content, line_no + 1, multiline=True)
+      comment = common.Comment(comment_content, line_no + 1, multiline=True)
       comments.append(comment)
     elif kind == "error":
       raise common.UnterminatedCommentError()
