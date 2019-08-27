@@ -6,7 +6,7 @@ def readme():
 
 setup(
     name='comment_parser',
-    version='1.1.2',
+    version='1.1.3',
     description='Parse comments from various source files.',
     classifiers=[
         'Development Status :: 5 - Production/Stable',

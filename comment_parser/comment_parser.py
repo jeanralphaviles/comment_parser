@@ -2,12 +2,15 @@
 """This program parses various source files and extracts the comment texts.
 
 Currently supported languages:
+  Bash/sh
   C
   C++
   Go
+  HTML
   Java
   Javascript
-  Bash/Sh
+  Ruby
+  XML
 
 Dependencies:
   python-magic: pip install python-magic
@@ -17,11 +20,12 @@ import sys
 
 import magic
 
-from comment_parser.parsers import common
 from comment_parser.parsers import c_parser
+from comment_parser.parsers import common
 from comment_parser.parsers import go_parser
 from comment_parser.parsers import html_parser
 from comment_parser.parsers import js_parser
+from comment_parser.parsers import ruby_parser
 from comment_parser.parsers import shell_parser
 
 MIME_MAP = {
@@ -32,6 +36,7 @@ MIME_MAP = {
     'text/x-go': go_parser,               # Go
     'text/x-java-source': c_parser,       # Java
     'text/x-javascript': js_parser,       # Javascript
+    'text/x-ruby': ruby_parser,           # Ruby
     'text/x-shellscript': shell_parser,   # Unix shell
     'text/xml': html_parser,              # XML
 }
