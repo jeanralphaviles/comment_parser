@@ -20,7 +20,7 @@ def extract_comments(code):
     Python list of common.Comment in the order that they appear in the code..
   """
   pattern = r"""
-    (?P<literal> ((?:'|").*(?:'|"))) |
+    (?P<literal> ([\"'])((?:\\\2|(?:(?!\2)).)*)(\2)) |
     (?P<single> \#(?P<single_content>.*?)$)
   """
   compiled = re.compile(pattern, re.VERBOSE | re.MULTILINE)
