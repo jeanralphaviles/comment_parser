@@ -50,7 +50,7 @@ def extract_comments(code):
       else:
         state = 0
     elif state == 2:
-      # In single-line comment, read characters util EOL.
+      # In single-line comment, read characters until EOL.
       if char == '\n':
         comment = common.Comment(current_comment, line_counter)
         comments.append(comment)
