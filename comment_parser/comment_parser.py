@@ -96,9 +96,9 @@ def extract_comments_from_str(code, mime=None):
     raise UnsupportedError('Unsupported MIME type %s' % mime)
   try:
     parser = MIME_MAP[mime]
+    return parser.extract_comments(code)
   except common.Error as e:
     raise ParseError(str(e))
-  return parser.extract_comments(code)
 
 
 def main(argv):
