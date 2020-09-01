@@ -13,12 +13,16 @@ Currently supported languages:
   XML
 
 Dependencies:
-  python-magic: pip install python-magic
+  python-magic: pip install python-magic (optional)
 """
 
 import sys
 
-import magic
+try:
+  import magic
+  has_magic = True
+except ImportError:
+  has_magic = False
 
 from comment_parser.parsers import c_parser
 from comment_parser.parsers import common
@@ -89,6 +93,8 @@ def extract_comments_from_str(code, mime=None):
     UnsupportedError: If code is of an unsupported MIME type.
   """
   if not mime:
+    if not has_magic:
+      raise ImportError('python-magic was not imported')
     mime = magic.from_buffer(code, mime=True)
     if isinstance(mime, bytes):
       mime = mime.decode('utf-8')
