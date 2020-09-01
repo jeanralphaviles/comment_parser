@@ -9,4 +9,4 @@ install:
 script:
   - python setup.py test
   - pylint comment_parser
-  - yapf -drp --style=chromium .
+  - yapf -drp --style=yapf .
