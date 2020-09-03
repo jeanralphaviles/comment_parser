@@ -39,6 +39,7 @@ MIME_MAP = {
     'text/x-c': c_parser,  # C
     'text/x-c++': c_parser,  # C++/C#
     'text/x-go': go_parser,  # Go
+    'text/x-java': c_parser,  # Java
     'text/x-java-source': c_parser,  # Java
     'text/x-javascript': js_parser,  # Javascript
     'text/x-python': python_parser,  # Python
