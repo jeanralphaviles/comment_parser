@@ -55,3 +55,16 @@ class CParserTest(unittest.TestCase):
         common.Comment(' 123 ', 1, multiline=True),
     ]
     self.assertEqual(comments, expected)
+
+  def testStringThenComment(self):
+    code = r'"" /* "abc */'
+    comments = c_parser.extract_comments(code)
+    expected = [
+        common.Comment(' "abc ', 1, multiline=True),
+    ]
+    self.assertEqual(comments, expected)
+
+  def testCommentStartInsideEscapedQuotesInStringLiteral(self):
+    code = r'" \" /* \" "'
+    comments = c_parser.extract_comments(code)
+    self.assertEqual(comments, [])
