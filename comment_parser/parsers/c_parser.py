@@ -35,11 +35,12 @@ def extract_comments(code):
       comment.
   """
   pattern = r"""
-    (?P<literal> \"(?:[^\"\\]*(?:\\\"|\\[^\"])*)*\") |
+    (?P<literal> (\"([^\"\n])*\")+) |
     (?P<single> //(?P<single_content>.*)?$) |
     (?P<multi> /\*(?P<multi_content>(.|\n)*?)?\*/) |
     (?P<error> /\*(.*)?)
   """
+
   compiled = re.compile(pattern, re.VERBOSE | re.MULTILINE)
 
   lines_indexes = []
