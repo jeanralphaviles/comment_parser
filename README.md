@@ -130,7 +130,7 @@ pylint comment_parser
 ### Running formatter
 
 ```shell
-yapf -rip --style=chromium .
+yapf -rip --style=yapf .
 ```
 
 ### Deploying to PyPi
