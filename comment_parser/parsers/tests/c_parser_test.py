@@ -68,3 +68,13 @@ class CParserTest(unittest.TestCase):
     code = r'" \" /* \" "'
     comments = c_parser.extract_comments(code)
     self.assertEqual(comments, [])
+
+  def testStringEscapedBackslashCharacter(self):
+    code = r'"\\"'
+    comments = c_parser.extract_comments(code)
+    self.assertEqual(comments, [])
+
+  def testTwoStringsFollowedByComment(self):
+    code = r'"""" // foo'
+    comments = c_parser.extract_comments(code)
+    self.assertEqual(comments, [common.Comment(' foo', 1)])
