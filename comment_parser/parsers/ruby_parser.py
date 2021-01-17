@@ -21,7 +21,9 @@ def extract_comments(code):
   """
   pattern = r"""
     (?P<literal> ([\"'])((?:\\\2|(?:(?!\2)).)*)(\2)) |
-    (?P<single> \#(?P<single_content>.*?)$)
+    (?P<single> \#(?P<single_content>.*?)$) |
+    (?P<multi> ^=begin$(?P<multi_content>(.|\n)*?)?^=end$) |
+    (?P<error> ^=begin$\*(.*)?)
   """
   compiled = re.compile(pattern, re.VERBOSE | re.MULTILINE)
 
@@ -40,5 +42,10 @@ def extract_comments(code):
       comment_content = match.group("single_content")
       comment = common.Comment(comment_content, line_no + 1)
       comments.append(comment)
-
+    elif kind == "multi":
+      comment_content = match.group("multi_content")
+      comment = common.Comment(comment_content, line_no + 1, multiline=True)
+      comments.append(comment)
+    elif kind == "error":
+      raise common.UnterminatedCommentError()
   return comments

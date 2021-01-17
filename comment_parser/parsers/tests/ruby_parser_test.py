@@ -6,7 +6,7 @@ from comment_parser.parsers import common
 from comment_parser.parsers import ruby_parser
 
 
-class ShellParserTest(unittest.TestCase):
+class RubyParserTest(unittest.TestCase):
 
   def testComment(self):
     code = '# comment'
@@ -62,4 +62,13 @@ class ShellParserTest(unittest.TestCase):
     code = r''''This is' # "a comment"'''
     comments = ruby_parser.extract_comments(code)
     expected = [common.Comment(code[11:], 1, multiline=False)]
+    self.assertEqual(comments, expected)
+
+  def testMultilineComment(self):
+    code = '=begin\nThis is a multiline comment.' \
+           'It is not terminated by =end \n=end'
+    comments = ruby_parser.extract_comments(code)
+    expected = [
+        common.Comment("This is a multiline comment.It is not terminated by =end ", 1, multiline=True)
+    ]
     self.assertEqual(comments, expected)
