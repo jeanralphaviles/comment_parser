@@ -98,9 +98,7 @@ class CParserTest(unittest.TestCase):
     */// and ended it here */'''
     comments = c_parser.extract_comments(code)
     expected = [
-        common.Comment('''// here
-      int main(){return 0;}
-      ''', 1, True),
+        common.Comment('// here\n    int main(){return 0;}\n    ', 1, True),
         common.Comment(' and ended it here */', 3, False)
     ]
     self.assertEqual(comments, expected)
