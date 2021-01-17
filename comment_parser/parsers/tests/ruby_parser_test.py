@@ -69,6 +69,9 @@ class RubyParserTest(unittest.TestCase):
            'It is not terminated by =end \n=end'
     comments = ruby_parser.extract_comments(code)
     expected = [
-        common.Comment("This is a multiline comment.It is not terminated by =end ", 1, multiline=True)
+        common.Comment(
+            "This is a multiline comment.It is not terminated by =end ",
+            1,
+            multiline=True)
     ]
     self.assertEqual(comments, expected)

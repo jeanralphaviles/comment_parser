@@ -22,7 +22,7 @@ def extract_comments(code):
   pattern = r"""
     (?P<literal> ([\"'])((?:\\\2|(?:(?!\2)).)*)(\2)) |
     (?P<single> \#(?P<single_content>.*?)$) |
-    (?P<multi> ^=begin$(?P<multi_content>(.|\n)*?)?^=end$) |
+    (?P<multi> ^=begin\n(?P<multi_content>(.|\n)*?)?\n=end$) |
     (?P<error> ^=begin$\*(.*)?)
   """
   compiled = re.compile(pattern, re.VERBOSE | re.MULTILINE)
