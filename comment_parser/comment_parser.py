@@ -11,6 +11,7 @@ Currently supported languages:
   Javascript
   Ruby
   XML
+  PHP
 
 Dependencies:
   python-magic: pip install python-magic (optional)
@@ -32,6 +33,7 @@ from comment_parser.parsers import js_parser
 from comment_parser.parsers import python_parser
 from comment_parser.parsers import ruby_parser
 from comment_parser.parsers import shell_parser
+from comment_parser.parsers import php_parser
 
 MIME_MAP = {
     'application/javascript': js_parser,  # Javascript
@@ -46,6 +48,7 @@ MIME_MAP = {
     'text/x-ruby': ruby_parser,  # Ruby
     'text/x-shellscript': shell_parser,  # Unix shell
     'text/xml': html_parser,  # XML
+    'text/x-php': php_parser,  # PHP
 }
 
 
