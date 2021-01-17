@@ -88,7 +88,7 @@ class CParserTest(unittest.TestCase):
     comments = c_parser.extract_comments(code)
     expected = [
       common.Comment(" What if i start a /* here", 1, False),
-      common.Comment("and ended it here */", 3, False)
+      common.Comment(" and ended it here */", 3, False)
     ]
     self.assertEqual(comments, expected)
 
