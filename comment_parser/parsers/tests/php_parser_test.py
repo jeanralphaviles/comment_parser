@@ -100,3 +100,41 @@ class PHPParserTest(unittest.TestCase):
     #// double comment'''
     comments = php_parser.extract_comments(code)
     self.assertEqual(comments, [common.Comment('// double comment', 2)])
+
+  def testNoPhpTag(self):
+    code = '''#// double comment'''
+    comments = php_parser.extract_comments(code)
+    self.assertEqual(comments, [])
+
+  def testCommentedPhpTag(self):
+    code = '''<?php
+    # ?>
+    /* Wouldn't be a commend if commented php end tag was misinterpreted */'''
+    comments = php_parser.extract_comments(code)
+    expected = [
+        common.Comment(' ?>', 2, multiline=False),
+        common.Comment(" Wouldn't be a commend if commented php end tag was misinterpreted ", 3, multiline=True)
+    ]
+    self.assertEqual(comments, expected)
+
+  def testCommentsOutsidePhpTag(self):
+    code = '''<?php echo "Hi";
+    ?>
+    // This is no comment <?php
+    // But this is'''
+    comments = php_parser.extract_comments(code)
+    expected = [
+        common.Comment(' But this is', 4, multiline=False)
+    ]
+    self.assertEqual(comments, expected)
+
+  def testMultilineString(self):
+    code = '''<?php echo "Hi
+    // Multi
+    # Line
+    ?>
+    <?php
+    /* String */
+    ";'''
+    comments = php_parser.extract_comments(code)
+    self.assertEqual(comments, [])

@@ -32,7 +32,7 @@ def extract_comments(code):
       comment.
   """
   pattern = r"""
-    (?P<literal> ([\"'])((?:\\\2|(?:(?!\2)).)*)(\2)) |
+    (?P<literal> (?:([\"'])((?:\\\2|(?:(?!\2)).|\n)*)(\2))|\?>((?!<\?php\s).|\n)*<\?php\s) |
     (?P<single> (?://|\#)(?P<single_content>.*)?$) |
     (?P<multi> /\*(?P<multi_content>(.|\n)*?)?\*/) |
     (?P<error> /\*(.*)?)
@@ -45,7 +45,7 @@ def extract_comments(code):
     lines_indexes.append(match.start())
 
   comments = []
-  for match in compiled.finditer(code):
+  for match in compiled.finditer("?>\n"+code+"\n<?php "):
     kind = match.lastgroup
 
     start_character = match.start()
