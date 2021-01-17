@@ -113,7 +113,10 @@ class PHPParserTest(unittest.TestCase):
     comments = php_parser.extract_comments(code)
     expected = [
         common.Comment(' ?>', 2, multiline=False),
-        common.Comment(" Wouldn't be a commend if commented php end tag was misinterpreted ", 3, multiline=True)
+        common.Comment(
+            " Wouldn't be a commend if commented php end tag was misinterpreted ",
+            3,
+            multiline=True)
     ]
     self.assertEqual(comments, expected)
 
@@ -123,9 +126,7 @@ class PHPParserTest(unittest.TestCase):
     // This is no comment <?php
     // But this is'''
     comments = php_parser.extract_comments(code)
-    expected = [
-        common.Comment(' But this is', 4, multiline=False)
-    ]
+    expected = [common.Comment(' But this is', 4, multiline=False)]
     self.assertEqual(comments, expected)
 
   def testMultilineString(self):
@@ -138,3 +139,28 @@ class PHPParserTest(unittest.TestCase):
     ";'''
     comments = php_parser.extract_comments(code)
     self.assertEqual(comments, [])
+
+  def testHereDocString(self):
+    code = '''<?php echo <<<Aä_0
+    // Multi "
+    # Line
+    ?>
+    <?php
+    /* String */"\nAä_0;'''
+    comments = php_parser.extract_comments(code)
+    self.assertEqual(comments, [])
+
+  def testFakeHereDocString(self):
+    code = '''<?php echo "<<<Aä_0
+    // Multi ";
+    # Line
+    ?>
+    \nAä_0;\n
+    <?php
+    /* String */"'''
+    comments = php_parser.extract_comments(code)
+    expect = [
+        common.Comment(" Line", 3, False),
+        common.Comment(" String ", 9, True)
+    ]
+    self.assertEqual(comments, expect)
