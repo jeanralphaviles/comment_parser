@@ -164,3 +164,9 @@ class PHPParserTest(unittest.TestCase):
         common.Comment(" String ", 9, True)
     ]
     self.assertEqual(comments, expect)
+
+  def testMultilineCommentWithEmptyFirstLine(self):
+    code = '<?php\n/*\n| Comment Roll\n*/\nint main(){return 0;}'
+    comments = php_parser.extract_comments(code)
+    expected = [common.Comment('\n| Comment Roll\n', 2, True)]
+    self.assertEqual(comments, expected)

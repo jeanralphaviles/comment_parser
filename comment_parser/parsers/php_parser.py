@@ -39,13 +39,17 @@ def extract_comments(code):
   """
 
   compiled = re.compile(pattern, re.VERBOSE | re.MULTILINE)
+  # The regex recognizes stuff between ?> and <?php as literal
+  # The following wrapping sets the expectation to be outside of php tags at the start
+  # and deals with the state, where the php tag is not open at the end of the file
+  code = "?>\n" + code + "\n<?php "
 
   lines_indexes = []
   for match in re.finditer(r"$", code, re.M):
     lines_indexes.append(match.start())
 
   comments = []
-  for match in compiled.finditer("?>\n" + code + "\n<?php "):
+  for match in compiled.finditer(code):
     kind = match.lastgroup
 
     start_character = match.start()
@@ -53,11 +57,14 @@ def extract_comments(code):
 
     if kind == "single":
       comment_content = match.group("single_content")
-      comment = common.Comment(comment_content, line_no + 1)
+      comment = common.Comment(comment_content,
+                               line_no)  # Line number is increased by wrapping
       comments.append(comment)
     elif kind == "multi":
       comment_content = match.group("multi_content")
-      comment = common.Comment(comment_content, line_no + 1, multiline=True)
+      comment = common.Comment(
+          comment_content, line_no,
+          multiline=True)  # Line number is increased by wrapping
       comments.append(comment)
     elif kind == "error":
       raise common.UnterminatedCommentError()
