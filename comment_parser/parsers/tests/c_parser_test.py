@@ -80,3 +80,25 @@ class CParserTest(unittest.TestCase):
     code = r'"""" // foo'
     comments = c_parser.extract_comments(code)
     self.assertEqual(comments, [common.Comment(' foo', 1)])
+
+  def testCommentedMultilineComment(self):
+    code = '''// What if i start a /* here
+    int main(){return 0;}
+    // and ended it here */'''
+    comments = c_parser.extract_comments(code)
+    expected = [
+        common.Comment(" What if i start a /* here", 1, False),
+        common.Comment(" and ended it here */", 3, False)
+    ]
+    self.assertEqual(comments, expected)
+
+  def testMultilineCommentedComment(self):
+    code = '''/*// here
+    int main(){return 0;}
+    */// and ended it here */'''
+    comments = c_parser.extract_comments(code)
+    expected = [
+        common.Comment('// here\n    int main(){return 0;}\n    ', 1, True),
+        common.Comment(' and ended it here */', 3, False)
+    ]
+    self.assertEqual(comments, expected)
