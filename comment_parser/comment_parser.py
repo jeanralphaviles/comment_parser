@@ -75,7 +75,7 @@ def extract_comments(filename, mime=None):
   Raises:
     UnsupportedError: If filename is of an unsupported MIME type.
   """
-  with open(filename, 'r') as code:
+  with open(filename, 'r', encoding="utf-8") as code:
     return extract_comments_from_str(code.read(), mime)
 
 
