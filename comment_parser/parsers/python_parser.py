@@ -37,7 +37,7 @@ def extract_comments(code):
     tokenize.TokenError
   """
   triplequotes = ['"""', "'''"]
-  prevtoknums = [tokenize.NEWLINE, tokenize.NL, tokenize.INDENT, tokenize.DEDENT]
+  multicommprevnums = [tokenize.NEWLINE, tokenize.NL, tokenize.INDENT, tokenize.DEDENT]
   prevtoknum = None # Stores the previous token's type.
   comments = []
   tokens = tokenize.tokenize(io.BytesIO(code.encode()).readline)
@@ -51,7 +51,7 @@ def extract_comments(code):
     # Multi-lined comment.
     if toknum is tokenize.STRING:
       if tokstring[:3] in triplequotes and tokstring[-3:] in triplequotes:
-        if (not prevtoknum) or prevtoknum in prevtoknums:
+        if (not prevtoknum) or prevtoknum in multicommprevnums:
           # Removes the leading and preceding 3ple quotes (""" or ''').
           tokstring = tokstring[3:-3]
           comments.append(common.Comment(tokstring, tokloc[0], True))
