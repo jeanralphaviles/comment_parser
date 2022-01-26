@@ -23,7 +23,7 @@ setup(
     long_description=readme(),
     long_description_content_type='text/markdown',
     packages=['comment_parser', 'comment_parser.parsers'],
-    install_requires=['python-magic==0.4.18'],
+    install_requires=['python-magic==0.4.24'],
     test_suite='nose.collector',
     tests_require=['nose'],
     zip_safe=False)
