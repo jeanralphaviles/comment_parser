@@ -151,6 +151,7 @@ twine upload dist/*
 | Java        | text/x-java-source       |
 | Javascript  | application/javascript   |
 | Python      | text/x-python            |
+| Python      | text/x-script.python     |
 | Ruby        | text/x-ruby              |
 | Shell       | text/x-shellscript       |
 | XML         | text/xml                 |

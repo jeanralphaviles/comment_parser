@@ -44,6 +44,7 @@ MIME_MAP = {
     'text/x-javascript': js_parser,  # Javascript
     'text/x-python': python_parser,  # Python
     'text/x-ruby': ruby_parser,  # Ruby
+    'text/x-script.python': python_parser,  # Python
     'text/x-shellscript': shell_parser,  # Unix shell
     'text/xml': html_parser,  # XML
 }
