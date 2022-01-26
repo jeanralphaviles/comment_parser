@@ -75,7 +75,7 @@ def extract_comments(filename, mime=None):
   Raises:
     UnsupportedError: If filename is of an unsupported MIME type.
   """
-  with open(filename, 'r') as code:
+  with open(filename, 'r', encoding='utf-8') as code:
     return extract_comments_from_str(code.read(), mime)
 
 
@@ -100,7 +100,7 @@ def extract_comments_from_str(code, mime=None):
     if isinstance(mime, bytes):
       mime = mime.decode('utf-8')
   if mime not in MIME_MAP:
-    raise UnsupportedError('Unsupported MIME type %s' % mime)
+    raise UnsupportedError(f'Unsupported MIME type {mime}')
   try:
     parser = MIME_MAP[mime]
     return parser.extract_comments(code)
