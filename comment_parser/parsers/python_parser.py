@@ -37,7 +37,7 @@ def extract_comments(code):
     tokenize.TokenError
   """
   triplequotes = ['"""', "'''"]
-  multicommprevnums = [tokenize.NEWLINE, tokenize.NL, tokenize.INDENT, tokenize.DEDENT]
+  multicommprevnums = [tokenize.ENCODING, tokenize.NEWLINE, tokenize.NL, tokenize.INDENT, tokenize.DEDENT]
   prevtoknum = None # Stores the previous token's type.
   comments = []
   tokens = tokenize.tokenize(io.BytesIO(code.encode()).readline)
