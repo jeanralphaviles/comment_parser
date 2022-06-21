@@ -5,6 +5,7 @@ import io
 import tokenize
 from comment_parser.parsers import common
 
+
 def extract_comments(code):
   """Extracts a list of comments from the given Python script.
 
@@ -37,9 +38,11 @@ def extract_comments(code):
     tokenize.TokenError
   """
   triplequotes = ['"""', "'''"]
-  multicommprevnums = [tokenize.ENCODING, tokenize.NEWLINE, tokenize.NL,
-                       tokenize.INDENT, tokenize.DEDENT]
-  prevtoknum = None # Stores the previous token's type.
+  multicommprevnums = [
+      tokenize.ENCODING, tokenize.NEWLINE, tokenize.NL, tokenize.INDENT,
+      tokenize.DEDENT
+  ]
+  prevtoknum = None  # Stores the previous token's type.
   comments = []
   tokens = tokenize.tokenize(io.BytesIO(code.encode()).readline)
   for toknum, tokstring, tokloc, _, _ in tokens:
