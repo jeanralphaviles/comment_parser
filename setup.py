@@ -1,3 +1,4 @@
+from platform import python_version
 from setuptools import setup
 
 
@@ -26,4 +27,6 @@ setup(
     install_requires=['python-magic==0.4.24'],
     test_suite='nose.collector',
     tests_require=['nose'],
-    zip_safe=False)
+    zip_safe=False,
+    python_requires='>=3.7',
+)
