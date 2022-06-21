@@ -45,3 +45,47 @@ class PythonParserTest(unittest.TestCase):
     comments = python_parser.extract_comments(code)
     expected = [common.Comment(code[3:], 1, multiline=False)]
     self.assertEqual(comments, expected)
+
+  def testTripleQuoteCommentsDoubleQuoteMultiline(self):
+    code = '"""this is triple quote comment\n'
+    code += 'with\n'
+    code += 'multiple\n'
+    code += 'lines\n'
+    code += '"""'
+    comments = python_parser.extract_comments(code)
+    import logging
+    logging.warning(comments)
+    logging.warning(code)
+    expected = [common.Comment(code.strip('"'), 1, multiline=True)]
+    self.assertEqual(comments, expected)
+  
+  def testTripleQuoteCommentsDoubleQuoteSingleline(self):
+    code = '"""this is triple quote comment"""'
+    comments = python_parser.extract_comments(code)
+    import logging
+    logging.warning(comments)
+    logging.warning(code)
+    expected = [common.Comment(code.strip('"'), 1, multiline=True)]
+    self.assertEqual(comments, expected)
+
+  def testTripleQuoteCommentsSingleQuoteMultiline(self):
+    code = '\'\'\'this is triple quote comment\n'
+    code += 'with\n'
+    code += 'multiple\n'
+    code += 'lines\n'
+    code += '\'\'\''
+    comments = python_parser.extract_comments(code)
+    import logging
+    logging.warning(comments)
+    logging.warning(code)
+    expected = [common.Comment(code.strip('\''), 1, multiline=True)]
+    self.assertEqual(comments, expected)
+  
+  def testTripleQuoteCommentsSingleQuoteSingleline(self):
+    code = '\'\'\'this is triple quote comment\'\'\''
+    comments = python_parser.extract_comments(code)
+    import logging
+    logging.warning(comments)
+    logging.warning(code)
+    expected = [common.Comment(code.strip('\''), 1, multiline=True)]
+    self.assertEqual(comments, expected)
