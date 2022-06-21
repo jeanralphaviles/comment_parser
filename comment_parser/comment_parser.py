@@ -17,6 +17,7 @@ Dependencies:
 """
 
 import sys
+from typing import List, Optional
 
 try:
   import magic
@@ -62,7 +63,8 @@ class ParseError(Error):
   """Raised when a parser issue is encountered."""
 
 
-def extract_comments(filename, mime=None):
+def extract_comments(filename: str,
+                     mime: Optional[str] = None) -> List[common.Comment]:
   """Extracts and returns the comments from the given source file.
 
   Args:
@@ -80,7 +82,9 @@ def extract_comments(filename, mime=None):
     return extract_comments_from_str(code.read(), mime)
 
 
-def extract_comments_from_str(code, mime=None):
+def extract_comments_from_str(code: str,
+                              mime: Optional[str] = None
+                             ) -> List[common.Comment]:
   """Extracts and returns comments from the given source string.
 
   Args:

@@ -17,7 +17,7 @@ class UnterminatedCommentError(Error):
 class Comment():
   """Represents comments found in source files."""
 
-  def __init__(self, text, line_number, multiline=False):
+  def __init__(self, text: str, line_number: int, multiline: bool = False):
     """Initializes Comment.
 
     Args:
@@ -29,7 +29,7 @@ class Comment():
     self._line_number = line_number
     self._multiline = multiline
 
-  def text(self):
+  def text(self) -> str:
     """Returns the comment's text.
 
     Returns:
@@ -37,7 +37,7 @@ class Comment():
     """
     return self._text
 
-  def line_number(self):
+  def line_number(self) -> int:
     """Returns the line number the comment was found on.
 
     Returns:
@@ -45,7 +45,7 @@ class Comment():
     """
     return self._line_number
 
-  def is_multiline(self):
+  def is_multiline(self) -> bool:
     """Returns whether this comment was a multiline comment.
 
     Returns:
@@ -53,13 +53,13 @@ class Comment():
     """
     return self._multiline
 
-  def __str__(self):
+  def __str__(self) -> str:
     return self._text
 
-  def __repr__(self):
+  def __repr__(self) -> str:
     return f'Comment({self._text}, {self._line_number}, {self._multiline})'
 
-  def __eq__(self, other):
+  def __eq__(self, other: object) -> bool:
     if isinstance(other, self.__class__):
       if self.__dict__ == other.__dict__:
         return True
