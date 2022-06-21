@@ -10,12 +10,12 @@ def extract_comments(code):
 
   Comments are identified using the tokenize module.
     - Single-lined comments which begin with the '#' character and end with a line-break.
-    - Multi-lined comments or docstrings, which are just triple-quoted strings (start 
-      and end with ''' or 3 of these "), are told apart from regular strings by the 
-      type of the previous token which should be a line-break or an indentation (NEWLINE, 
-      NL, INDENT or DEDENT) or no token at all (it would mean it's the fisrt thing in 
-      the script). Even in cases like this: 
-        
+    - Multi-lined comments or docstrings, which are just triple-quoted strings (start
+      and end with ''' or 3 of these "), are told apart from regular strings by the
+      type of the previous token which should be a line-break or an indentation (NEWLINE,
+      NL, INDENT or DEDENT) or no token at all (it would mean it's the first thing in
+      the script). Even in cases like this:
+
         my_string = \
         '''this should not be considered a comment'''
 
@@ -24,9 +24,9 @@ def extract_comments(code):
 
         my_string = \
             '''weird syntax anyway''' # <- but still valid indentation
-      
-      the previous token to the string is the '=' operator and not a line-break or an  
-      indentation. That way, only triple-quoted strings preceded by a line-break, an 
+
+      the previous token to the string is the '=' operator and not a line-break or an
+      indentation. That way, only triple-quoted strings preceded by a line-break, an
       indentation, or no token, will be considered intended as comments.
 
   Args:
@@ -37,7 +37,8 @@ def extract_comments(code):
     tokenize.TokenError
   """
   triplequotes = ['"""', "'''"]
-  multicommprevnums = [tokenize.ENCODING, tokenize.NEWLINE, tokenize.NL, tokenize.INDENT, tokenize.DEDENT]
+  multicommprevnums = [tokenize.ENCODING, tokenize.NEWLINE, tokenize.NL,
+                       tokenize.INDENT, tokenize.DEDENT]
   prevtoknum = None # Stores the previous token's type.
   comments = []
   tokens = tokenize.tokenize(io.BytesIO(code.encode()).readline)
