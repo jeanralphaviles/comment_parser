@@ -4,6 +4,7 @@ python:
   - '3.8'
   - '3.9'
 install:
+  - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]]; then pip install 'setuptools<=60.9.0'; fi
   - python setup.py -q install
   - pip install pylint yapf
 script:
