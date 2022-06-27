@@ -1,3 +1,4 @@
+from platform import python_version
 from setuptools import setup
 
 
@@ -23,7 +24,9 @@ setup(
     long_description=readme(),
     long_description_content_type='text/markdown',
     packages=['comment_parser', 'comment_parser.parsers'],
-    install_requires=['python-magic==0.4.24'],
+    install_requires=['python-magic>=0.4.24,<0.5.0'],
     test_suite='nose.collector',
     tests_require=['nose'],
-    zip_safe=False)
+    zip_safe=False,
+    python_requires='>=3.7',
+)
