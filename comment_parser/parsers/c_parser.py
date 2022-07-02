@@ -10,10 +10,11 @@ Works with:
 
 import re
 from bisect import bisect_left
+from typing import List
 from comment_parser.parsers import common
 
 
-def extract_comments(code):
+def extract_comments(code: str) -> List[common.Comment]:
   """Extracts a list of comments from the given C family source code.
 
   Comments are represented with the Comment class found in the common module.

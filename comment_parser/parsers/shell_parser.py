@@ -1,10 +1,11 @@
 #!/usr/bin/python
 """This module provides methods for parsing comments from shell scripts."""
 
+from typing import List
 from comment_parser.parsers import common
 
 
-def extract_comments(code):
+def extract_comments(code: str) -> List[common.Comment]:
   """Extracts a list of comments from the given shell script.
 
   Comments are represented with the Comment class found in the common module.

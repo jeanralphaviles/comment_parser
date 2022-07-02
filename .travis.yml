@@ -6,8 +6,9 @@ python:
 install:
   - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]]; then pip install 'setuptools<=60.9.0'; fi
   - python setup.py -q install
-  - pip install pylint yapf
+  - pip install pylint yapf pytype
 script:
   - python setup.py test
   - pylint comment_parser
+  - pytype
   - yapf -drp --style=yapf .

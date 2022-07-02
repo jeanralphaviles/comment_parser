@@ -3,10 +3,11 @@
 
 import io
 import tokenize
+from typing import List
 from comment_parser.parsers import common
 
 
-def extract_comments(code):
+def extract_comments(code: str) -> List[common.Comment]:
   """Extracts a list of comments from the given Python script.
 
   Comments are identified using the tokenize module. Does not include function,
