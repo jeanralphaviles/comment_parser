@@ -33,6 +33,7 @@ from comment_parser.parsers import js_parser
 from comment_parser.parsers import python_parser
 from comment_parser.parsers import ruby_parser
 from comment_parser.parsers import shell_parser
+from comment_parser.parsers import haskell_parser
 
 MIME_MAP = {
     'application/javascript': js_parser,  # Javascript
@@ -48,6 +49,7 @@ MIME_MAP = {
     'text/x-script.python': python_parser,  # Python
     'text/x-shellscript': shell_parser,  # Unix shell
     'text/xml': html_parser,  # XML
+    'text/x-haskell': haskell_parser,  # haskell_parser
 }
 
 
