@@ -51,6 +51,8 @@ MIME_MAP = {
     'text/xml': html_parser,  # XML
     'text/x-lisp': lisp_parser,  # Lisp
     'text/x-clojure': lisp_parser,  # Clojure
+    'text/x-racket': lisp_parser,  # Racket
+    'text/x-scheme': lisp_parser,  # Scheme
 }
 
 
