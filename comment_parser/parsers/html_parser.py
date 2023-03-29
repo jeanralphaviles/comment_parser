@@ -51,8 +51,12 @@ def extract_comments(code: str) -> List[common.Comment]:
       comment = common.Comment(comment_content, line_no + 1)
       comments.append(comment)
     elif kind == "multi":
+      end_character = match.end()
+      line_no_end = bisect_left(lines_indexes, end_character)
+      line_no = [x for x in range(line_no, line_no_end+1)]
+      line_no = [x+1 for x in line_no]
       comment_content = match.group("multi_content")
-      comment = common.Comment(comment_content, line_no + 1, multiline=True)
+      comment = common.Comment(comment_content, line_no, multiline=True)
       comments.append(comment)
     elif kind == "error":
       raise common.UnterminatedCommentError()

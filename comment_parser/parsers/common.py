@@ -1,5 +1,6 @@
 #!/usr/bin/python
 """This module provides constructs common to all comment parsers."""
+from typing import Union, List
 
 
 class Error(Exception):
@@ -17,12 +18,12 @@ class UnterminatedCommentError(Error):
 class Comment():
   """Represents comments found in source files."""
 
-  def __init__(self, text: str, line_number: int, multiline: bool = False):
+  def __init__(self, text: str, line_number: Union[int, List], multiline: bool = False):
     """Initializes Comment.
 
     Args:
       text: String text of comment.
-      line_number: Line number (int) comment was found on.
+      line_number: Line number (int or List) comment was found on.
       multiline: Boolean whether this comment was a multiline comment.
     """
     self._text = text
@@ -37,11 +38,11 @@ class Comment():
     """
     return self._text
 
-  def line_number(self) -> int:
+  def line_number(self) -> Union[int, List]:
     """Returns the line number the comment was found on.
 
     Returns:
-      Int
+      Union[int, List]
     """
     return self._line_number
 
