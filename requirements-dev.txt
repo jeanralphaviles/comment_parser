@@ -1,0 +1,4 @@
+pylint==3.3.3
+pytest==8.3.4
+setuptools==75.6.0
+yapf==0.43.0

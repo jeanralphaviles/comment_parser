@@ -106,9 +106,15 @@ class Comment(object):
 
 ## Development
 
+### Install Dependencies
+
+```shell
+pip install -r requirements.txt -r requirements-dev.txt
+```
+
 ### Running locally
 
-Start python3 in the base of repository.
+Start python in the base of repository.
 
 ```python
 from comment_parser import comment_parser
@@ -118,7 +124,7 @@ comment_parser.extract_comments('foo.c', mime='text/x-c')
 ### Running tests
 
 ```shell
-python3 setup.py test
+python -m pytest
 ```
 
 ### Running pylint
@@ -136,7 +142,7 @@ yapf -rip --style=yapf .
 ### Deploying to PyPi
 
 ```shell
-python3 setup.py sdist
+python setup.py sdist
 twine upload dist/*
 ```
 

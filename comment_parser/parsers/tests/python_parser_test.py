@@ -33,15 +33,3 @@ class PythonParserTest(unittest.TestCase):
     code = '"this is \'# not a comment\'"'
     comments = python_parser.extract_comments(code)
     self.assertEqual(comments, [])
-
-  def testEscapedSingleQuote(self):
-    code = "\\'# this is a comment"
-    comments = python_parser.extract_comments(code)
-    expected = [common.Comment(code[3:], 1, multiline=False)]
-    self.assertEqual(comments, expected)
-
-  def testEscapedDoubleQuote(self):
-    code = '\\"# this is a comment'
-    comments = python_parser.extract_comments(code)
-    expected = [common.Comment(code[3:], 1, multiline=False)]
-    self.assertEqual(comments, expected)

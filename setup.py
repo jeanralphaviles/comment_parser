@@ -9,7 +9,7 @@ def readme():
 
 setup(
     name='comment_parser',
-    version='1.2.4',
+    version='1.2.5',
     description='Parse comments from various source files.',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
@@ -24,9 +24,7 @@ setup(
     long_description=readme(),
     long_description_content_type='text/markdown',
     packages=['comment_parser', 'comment_parser.parsers'],
-    install_requires=['python-magic>=0.4.24,<0.5.0'],
-    test_suite='nose.collector',
-    tests_require=['nose'],
+    install_requires=['python-magic>=0.4.27'],
     zip_safe=False,
-    python_requires='>=3.7',
+    python_requires='>=3.13',
 )
