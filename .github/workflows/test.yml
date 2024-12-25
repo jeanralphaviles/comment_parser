@@ -1,0 +1,32 @@
+name: Run Tests
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - name: Install Dependencies
+        run: pip install -r requirements.txt -r requirements-dev.txt
+      - name: Type Checking
+        run: python -m pytype --jobs auto
+      - name: Test
+        run: python -m pytest
+      - name: Lint
+        run: python -m pylint comment_parser
+      - name: Formatting
+        run: python -m yapf -drp comment_parser
+
+  build:
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: python setup.py sdist
