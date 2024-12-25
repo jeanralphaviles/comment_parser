@@ -1,0 +1,42 @@
+name: Deploy
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: Build
+        run: python setup.py sdist
+      - name: Upload Distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-dists
+          path: dist/
+  deploy:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    environment:
+      name: pypi
+      url: https://pypi.org/p/comment-parser
+    permissions:
+      id-token: write
+    steps:
+      - name: Retrieve Distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: release-dists
+          path: dist/
+      - name: Publish release distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+          print-hash: true
+          skip-existing: true
