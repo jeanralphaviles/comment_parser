@@ -21,6 +21,7 @@ sudo pip3 install comment_parser
 ```
 
 ### OSX and Windows
+
 Additionally, complete the special installation requirements for
 [python-magic](https://github.com/ahupp/python-magic).
 
@@ -35,6 +36,7 @@ To use, simply run:
 >>> # Or
 >>> comment_parser.extract_comments_from_str('...')
 ```
+
 ### extract_comments signatures
 
 ```python
@@ -71,6 +73,7 @@ def extract_comments_from_str(code, mime=None):
     """
     pass
 ```
+
 ### Comments Interface
 
 ```python
@@ -136,7 +139,7 @@ pylint comment_parser
 ### Running formatter
 
 ```shell
-yapf -rip --style=yapf .
+yapf -rip .
 ```
 
 ### Deploying to PyPi

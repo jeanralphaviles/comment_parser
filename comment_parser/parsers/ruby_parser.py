@@ -8,7 +8,7 @@ from comment_parser.parsers import common
 
 
 def extract_comments(code: str) -> List[common.Comment]:
-  """Extracts a list of comments from the given Ruby source code.
+    """Extracts a list of comments from the given Ruby source code.
 
   Comments are represented with the Comment class found in the common module.
 
@@ -20,26 +20,26 @@ def extract_comments(code: str) -> List[common.Comment]:
   Returns:
     Python list of common.Comment in the order that they appear in the code..
   """
-  pattern = r"""
+    pattern = r"""
     (?P<literal> ([\"'])((?:\\\2|(?:(?!\2)).)*)(\2)) |
     (?P<single> \#(?P<single_content>.*?)$)
   """
-  compiled = re.compile(pattern, re.VERBOSE | re.MULTILINE)
+    compiled = re.compile(pattern, re.VERBOSE | re.MULTILINE)
 
-  lines_indexes = []
-  for match in re.finditer(r"$", code, re.M):
-    lines_indexes.append(match.start())
+    lines_indexes = []
+    for match in re.finditer(r"$", code, re.M):
+        lines_indexes.append(match.start())
 
-  comments = []
-  for match in compiled.finditer(code):
-    kind = match.lastgroup
+    comments = []
+    for match in compiled.finditer(code):
+        kind = match.lastgroup
 
-    start_character = match.start()
-    line_no = bisect_left(lines_indexes, start_character)
+        start_character = match.start()
+        line_no = bisect_left(lines_indexes, start_character)
 
-    if kind == "single":
-      comment_content = match.group("single_content")
-      comment = common.Comment(comment_content, line_no + 1)
-      comments.append(comment)
+        if kind == "single":
+            comment_content = match.group("single_content")
+            comment = common.Comment(comment_content, line_no + 1)
+            comments.append(comment)
 
-  return comments
+    return comments
