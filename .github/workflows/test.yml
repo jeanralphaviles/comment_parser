@@ -28,5 +28,7 @@ jobs:
       - test
     steps:
       - uses: actions/checkout@v4
+      - name: Install build
+        run: pip install build
       - name: Build
-        run: python setup.py sdist
+        run: python -m build
