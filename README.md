@@ -146,7 +146,7 @@ yapf -rip .
 ### Deploying to PyPi
 
 ```shell
-python setup.py sdist
+python -m build
 twine upload dist/*
 ```
 

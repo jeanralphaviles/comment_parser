@@ -11,9 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Dependencies
-        run: pip install -r requirements.txt
+        run: pip install build
       - name: Build
-        run: python setup.py sdist
+        run: python -m build
       - name: Upload Distributions
         uses: actions/upload-artifact@v4
         with:
