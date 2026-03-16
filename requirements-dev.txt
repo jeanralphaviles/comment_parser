@@ -1,5 +1,5 @@
-pylint==3.3.3
-pytest==8.3.4
+pylint==4.0.5
+pytest==9.0.2
 pytype==2024.10.11
-setuptools==75.6.0
+setuptools==82.0.1
 yapf==0.43.0
