@@ -165,6 +165,7 @@ twine upload dist/*
 | Ruby        | text/x-ruby              |
 | Shell       | text/x-shellscript       |
 | XML         | text/xml                 |
+| PHP         | text/x-php               |
 
 And more to come!
 
