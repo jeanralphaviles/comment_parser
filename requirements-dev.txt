@@ -1,4 +1,4 @@
 pylint==4.0.5
-pytest==9.0.2
+pytest==9.0.3
 pytype==2024.10.11
 yapf==0.43.0
